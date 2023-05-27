@@ -46,7 +46,7 @@ mongoose.connect(db,{
 
 app.use("/user", userRouter);
 // app.use("/dealer", dealerRouter);
-// app.use("/species", speciesRouter);
+app.use("/species", speciesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

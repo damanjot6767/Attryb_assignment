@@ -15,7 +15,7 @@ const checkDealerAuthorization = async (req, res, next) => {
         let user = await dealerModel.findOne({ _id: usr._id })
         console.log("user: " + user)
         if (user) {
-          req.user = user;
+          req.dealerId = user._id;
           next();
         }else{
           res.status(404).json({status: "failure", error: "invalid credentials" })
@@ -45,7 +45,7 @@ const checkUserAuthorization = async (req, res, next) => {
         let user = await userModel.findOne({ _id: usr._id })
         console.log("user: " + user)
         if (user) {
-          req.user = user;
+          req.userId = user._id;
           next();
         }else{
           res.status(404).json({status: "failure", error: "invalid credentials" })

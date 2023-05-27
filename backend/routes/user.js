@@ -15,5 +15,6 @@ router.put("/editUser/:id", checkUserAuthorization, userController.editUser)
 router.post("/resetPassword", checkUserAuthorization, userController.resetpassword)
 router.post("/buyCar", checkUserAuthorization, userController.buyCar)
 router.post("/filterCar", checkUserAuthorization, userController.filterCar)
+router.get("/fetchCars", checkUserAuthorization, userController.fetchUser)
 
 module.exports = router

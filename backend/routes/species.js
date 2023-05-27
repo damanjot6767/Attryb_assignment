@@ -5,4 +5,7 @@ let {speciesController} = require("../controllers")
 //--------------------------------------------------------------Species
 
 router.get("/fetchSpecies",speciesController.fetchSpecies);
-router.put("/filterSpecies",speciesController.filterSpecies);
+router.get("/filterSpecies",speciesController.filterSpecies);
+
+
+module.exports = router

@@ -15,5 +15,7 @@ router.get("/fetchCar/:id", checkDealerAuthorization, dealerController.fetchCars
 
 //----------------------------------------------------Dealer
 router.get("/fetchDealer", checkDealerAuthorization, dealerController.fetchDealer)
-router.put("/editDealer/:id", checkDealerAuthorization, dealerController.editDealer)
+router.put("/editDealer", checkDealerAuthorization, dealerController.editDealer)
 router.post("/resetPassword", checkDealerAuthorization, dealerController.resetpassword)
+
+module.exports = router

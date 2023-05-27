@@ -46,7 +46,7 @@ module.exports = {
 
     fetchDealer : async(req, res)=>{
         try{
-            const dealer = await dealerModel.find({_id:req.userId})
+            const dealer = await dealerModel.find({_id:req.dealerId})
             res.json({status:"success", data: dealer})
         }
         catch(err){
@@ -56,9 +56,8 @@ module.exports = {
     },
 
     editDealer: async(req, res)=>{
-        const {id} = req.params
         try{
-            const edit = await dealerModel.findOneAndUpdate({_id:id},
+            const edit = await dealerModel.findOneAndUpdate({_id:req.dealerId},
                 {
                     email: req.body.email,
                     name:req.body.name,
@@ -80,7 +79,7 @@ module.exports = {
     createCar: async (req, res) =>{
         let {carImage,kms,majorScratches,color,accidentsReported,previousBuyers,registrationPlace,oemId,price} = req.body
         try{
-                const car = await carModel.create({carImage,kms,majorScratches,color,accidentsReported,previousBuyers,registrationPlace,oemId,dealerId:req.userId,price})
+                const car = await carModel.create({carImage,kms,majorScratches,color,accidentsReported,previousBuyers,registrationPlace,oemId,dealerId:req.dealerId,price})
                 res.json({status:"success", data: car})
         }
         catch(err){
@@ -91,7 +90,7 @@ module.exports = {
 
     fetchCars :async(req, res)=>{
         try{
-            const car = await carModel.find();
+            const car = await carModel.find({dealerId:req.dealerId});
             res.json({status:"success", data: car});
         }
         catch(err){
@@ -145,7 +144,7 @@ module.exports = {
                 return res.status(400).json({status:"failure", msg:"oldpassword and password are required"});
             }
 
-            const arbor = await dealerModel.findOne({_id: req.user._id, password:md5(oldpassword)})
+            const arbor = await dealerModel.findOne({_id: req.dealerId, password:md5(oldpassword)})
             if(!arbor){
                 return res.status(400).json({status:"failure", msg:"oldpassword is incorrect!"})
             } else {

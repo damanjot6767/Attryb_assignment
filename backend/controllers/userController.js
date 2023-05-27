@@ -144,5 +144,15 @@ module.exports ={
           console.error(error);
           res.status(500).json({ error: 'Internal Server Error' });
         }
-      }
+      },
+      fetchCars :async(req, res)=>{
+        try{
+            const car = await carModel.find();
+            res.json({status:"success", data: car});
+        }
+        catch(err){
+            console.log(err.message)
+            res.status(400).json({error: err.message})
+        }
+    },
 }
